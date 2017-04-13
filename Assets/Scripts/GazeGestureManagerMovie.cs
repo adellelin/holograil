@@ -14,8 +14,15 @@ public class GazeGestureManagerMovie : MonoBehaviour {
 
     GameObject movieTop;
     GameObject movieBottom;
+    GameObject movieLeft;
+    GameObject movieRight;
+    GameObject movieCenter;
+    
     private movieStart MovieTopStartObject;
     private movieStart MovieBottomStartObject;
+    private movieStart MovieLeftStartObject;
+    private movieStart MovieRightStartObject;
+    private movieStart MovieCenterStartObject;
 
     // Use this for initialization
     void Start () {
@@ -24,6 +31,9 @@ public class GazeGestureManagerMovie : MonoBehaviour {
 
         movieTop = GameObject.Find("MovieTop");
         movieBottom = GameObject.Find("MovieBottom");
+        movieLeft = GameObject.Find("MovieLeft");
+        movieRight = GameObject.Find("MovieRight");
+        movieCenter = GameObject.Find("MovieCenter");
 
         // set up a gesture recognizer to detect select gestures
         recognizer = new GestureRecognizer();
@@ -67,20 +77,55 @@ public class GazeGestureManagerMovie : MonoBehaviour {
             {
                 MovieTopStartObject = movieTop.GetComponent<movieStart>();
                 MovieTopStartObject.PlayMovie();
-            } else
-            {
-                MovieTopStartObject.PauseMovie();
+                MovieBottomStartObject.PauseMovie();
+                MovieLeftStartObject.PauseMovie();
+                MovieRightStartObject.PauseMovie();
+                MovieCenterStartObject.PauseMovie();
             }
-
-            if (FocusedObject == movieBottom)
+            else if (FocusedObject == movieBottom)
             {
                 MovieBottomStartObject = movieBottom.GetComponent<movieStart>();
                 MovieBottomStartObject.PlayMovie();
+                MovieTopStartObject.PauseMovie();
+                MovieLeftStartObject.PauseMovie();
+                MovieRightStartObject.PauseMovie();
+                MovieCenterStartObject.PauseMovie();
             }
-            else
+            else if (FocusedObject == movieLeft)
             {
+                MovieLeftStartObject = movieLeft.GetComponent<movieStart>();
+                MovieLeftStartObject.PlayMovie();
+                MovieTopStartObject.PauseMovie();
                 MovieBottomStartObject.PauseMovie();
+                MovieRightStartObject.PauseMovie();
+                MovieCenterStartObject.PauseMovie();
             }
+            else if (FocusedObject == movieRight)
+            {
+                MovieRightStartObject = movieRight.GetComponent<movieStart>();
+                MovieRightStartObject.PlayMovie();
+                MovieTopStartObject.PauseMovie();
+                MovieBottomStartObject.PauseMovie();
+                MovieLeftStartObject.PauseMovie();
+                MovieCenterStartObject.PauseMovie();
+            }
+            else if (FocusedObject == movieCenter)
+            {
+                MovieCenterStartObject = movieCenter.GetComponent<movieStart>();
+                MovieCenterStartObject.PlayMovie();
+                MovieTopStartObject.PauseMovie();
+                MovieBottomStartObject.PauseMovie();
+                MovieLeftStartObject.PauseMovie();
+                MovieCenterStartObject.PauseMovie();
+            } else
+            {
+                MovieTopStartObject.PauseMovie();
+                MovieBottomStartObject.PauseMovie();
+                MovieLeftStartObject.PauseMovie();
+                MovieRightStartObject.PauseMovie();
+                MovieCenterStartObject.PauseMovie();
+            }
+
             recognizer.CancelGestures();
             recognizer.StartCapturingGestures();
         }
