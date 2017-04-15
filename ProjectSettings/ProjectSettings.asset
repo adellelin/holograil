@@ -6,12 +6,12 @@ PlayerSettings:
   serializedVersion: 10
   productGUID: b06aa65189d0c99429df52fedd2f67ba
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 3
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Holographic Academy
-  productName: Holograil0413
+  productName: Holograil0415
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -559,13 +559,13 @@ PlayerSettings:
   cloudServicesEnabled:
     Analytics: 0
     Build: 0
-    Collab: 1
+    Collab: 0
     ErrorHub: 0
     Hub: 0
     Purchasing: 0
-    UNet: 1
+    UNet: 0
     Unity_Ads: 0
   cloudProjectId: d2b8371f-9d0e-4e69-88a3-3403aafc6bcd
-  projectName: Holograil552_0404
+  projectName: Holograil
   organizationId: adellelin
   cloudEnabled: 0
