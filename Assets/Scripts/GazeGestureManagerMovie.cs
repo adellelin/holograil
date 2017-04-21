@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR.WSA.Input;
+using UnityEngine.UI;
 
 public class GazeGestureManagerMovie : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class GazeGestureManagerMovie : MonoBehaviour {
     GameObject movieLeft;
     GameObject movieRight;
     GameObject movieCenter;
+    GameObject bio;
     
     private movieStart MovieTopStartObject;
     private movieStart MovieBottomStartObject;
@@ -24,8 +26,12 @@ public class GazeGestureManagerMovie : MonoBehaviour {
     private movieStart MovieRightStartObject;
     private movieStart MovieCenterStartObject;
 
+
+    public Text BioText;
+
+
     // Use this for initialization
-    void Start () {
+    void Awake () {
 
         instance = this;
 
@@ -34,6 +40,15 @@ public class GazeGestureManagerMovie : MonoBehaviour {
         movieLeft = GameObject.Find("MovieLeft");
         movieRight = GameObject.Find("MovieRight");
         movieCenter = GameObject.Find("MovieCenter");
+        bio = GameObject.Find("Bio");
+
+
+    }
+
+    void Start()
+    {
+        BioText.enabled = false;
+
 
         // set up a gesture recognizer to detect select gestures
         recognizer = new GestureRecognizer();
@@ -43,14 +58,15 @@ public class GazeGestureManagerMovie : MonoBehaviour {
             if (FocusedObject != null)
             {
                 FocusedObject.SendMessageUpwards("OnSelect");
+                //  to call onAirTapped method
+                FocusedObject.SendMessage("OnAirTapped", SendMessageOptions.RequireReceiver);
             }
         };
         recognizer.StartCapturingGestures();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         GameObject oldFocusedObject = FocusedObject;
 
         // do raycast into world based on user's head position
@@ -72,7 +88,18 @@ public class GazeGestureManagerMovie : MonoBehaviour {
         // if the focused object changed, start detecting fresh gestures
         if (FocusedObject != oldFocusedObject)
         {
-
+            if (FocusedObject == bio)
+            {
+                BioText.enabled = true;
+               bio.transform.Rotate(Vector3.up * 50 * Time.deltaTime, Space.Self);
+              
+                Debug.Log("found bio");
+            }
+            else
+            {
+                BioText.enabled = false;
+            }
+            
             if (FocusedObject == movieTop)
             {
                 MovieTopStartObject = movieTop.GetComponent<movieStart>();
@@ -116,7 +143,7 @@ public class GazeGestureManagerMovie : MonoBehaviour {
                 MovieTopStartObject.PauseMovie();
                 MovieBottomStartObject.PauseMovie();
                 MovieLeftStartObject.PauseMovie();
-                MovieCenterStartObject.PauseMovie();
+                MovieRightStartObject.PauseMovie();
             } else
             {
                 MovieTopStartObject.PauseMovie();
@@ -126,6 +153,7 @@ public class GazeGestureManagerMovie : MonoBehaviour {
                 MovieCenterStartObject.PauseMovie();
             }
 
+    
             recognizer.CancelGestures();
             recognizer.StartCapturingGestures();
         }
