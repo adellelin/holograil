@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.VR.WSA.Input;
 using UnityEngine.UI;
 
-public class GazeGestureManagerMovie : MonoBehaviour {
+public class GazeGestureManagerMovie : MonoBehaviour
+{
 
     public static GazeGestureManagerMovie instance { get; private set; }
 
@@ -18,20 +19,27 @@ public class GazeGestureManagerMovie : MonoBehaviour {
     GameObject movieLeft;
     GameObject movieRight;
     GameObject movieCenter;
-    GameObject bio;
-    
+    GameObject toniBio;
+    GameObject toniContact;
+    GameObject toniCalendar;
+    GameObject toniStatement;
+    //private GameObject[] toniDeskObject;
+    List<GameObject> toniDeskObjects = new List<GameObject>();
+
+
     private movieStart MovieTopStartObject;
     private movieStart MovieBottomStartObject;
     private movieStart MovieLeftStartObject;
     private movieStart MovieRightStartObject;
     private movieStart MovieCenterStartObject;
 
+    public Text[] ToniDeskText;
 
-    public Text BioText;
 
 
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
 
         instance = this;
 
@@ -40,15 +48,25 @@ public class GazeGestureManagerMovie : MonoBehaviour {
         movieLeft = GameObject.Find("MovieLeft");
         movieRight = GameObject.Find("MovieRight");
         movieCenter = GameObject.Find("MovieCenter");
-        bio = GameObject.Find("Bio");
 
+        toniBio = GameObject.Find("ToniBio");
+        toniCalendar = GameObject.Find("ToniCalendar");
+        toniStatement = GameObject.Find("ToniStatement");
+        toniContact = GameObject.Find("ToniContact");
+        toniDeskObjects.Add(toniBio);
+        toniDeskObjects.Add(toniCalendar);
+        toniDeskObjects.Add(toniContact);
+        toniDeskObjects.Add(toniStatement);
 
     }
 
     void Start()
     {
-        BioText.enabled = false;
-
+    
+        for (int i = 0; i < ToniDeskText.Length; i++)
+        {
+            ToniDeskText[i].enabled = false;
+        }
 
         // set up a gesture recognizer to detect select gestures
         recognizer = new GestureRecognizer();
@@ -65,8 +83,10 @@ public class GazeGestureManagerMovie : MonoBehaviour {
         recognizer.StartCapturingGestures();
 
     }
+
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         GameObject oldFocusedObject = FocusedObject;
 
         // do raycast into world based on user's head position
@@ -78,8 +98,9 @@ public class GazeGestureManagerMovie : MonoBehaviour {
         if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))
         {
             FocusedObject = hitInfo.collider.gameObject;
-            
-        } else
+
+        }
+        else
         {
             // if the raycast did no hit holo, clear focused object
             FocusedObject = null;
@@ -88,18 +109,23 @@ public class GazeGestureManagerMovie : MonoBehaviour {
         // if the focused object changed, start detecting fresh gestures
         if (FocusedObject != oldFocusedObject)
         {
-            if (FocusedObject == bio)
+            Debug.Log(FocusedObject);
+            for (int i = 0; i < ToniDeskText.Length; i++)
             {
-                BioText.enabled = true;
-               bio.transform.Rotate(Vector3.up * 50 * Time.deltaTime, Space.Self);
-              
-                Debug.Log("found bio");
+                if (FocusedObject == toniDeskObjects[i])
+                {
+                   
+                    ToniDeskText[i].enabled = true;
+                    //toniBio.transform.Rotate(Vector3.up * 50 * Time.deltaTime, Space.Self);
+
+                    Debug.Log("found bio");
+                }
+                else
+                {
+                    ToniDeskText[i].enabled = false;
+                }
             }
-            else
-            {
-                BioText.enabled = false;
-            }
-            
+            /*
             if (FocusedObject == movieTop)
             {
                 MovieTopStartObject = movieTop.GetComponent<movieStart>();
@@ -144,7 +170,8 @@ public class GazeGestureManagerMovie : MonoBehaviour {
                 MovieBottomStartObject.PauseMovie();
                 MovieLeftStartObject.PauseMovie();
                 MovieRightStartObject.PauseMovie();
-            } else
+            }
+            else
             {
                 MovieTopStartObject.PauseMovie();
                 MovieBottomStartObject.PauseMovie();
@@ -152,8 +179,8 @@ public class GazeGestureManagerMovie : MonoBehaviour {
                 MovieRightStartObject.PauseMovie();
                 MovieCenterStartObject.PauseMovie();
             }
+            */
 
-    
             recognizer.CancelGestures();
             recognizer.StartCapturingGestures();
         }
