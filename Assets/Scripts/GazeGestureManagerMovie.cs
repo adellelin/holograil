@@ -75,12 +75,12 @@ public class GazeGestureManagerMovie : MonoBehaviour
         MovieTopStartObject = movieTop.GetComponent<movieStart>();
         MovieBottomStartObject = movieBottom.GetComponent<movieStart>();
         MovieRightStartObject = movieRight.GetComponent<movieStart>();
-        MovieLeftStartObject = movieRight.GetComponent<movieStart>();
-        MovieCenterStartObject = movieRight.GetComponent<movieStart>();
+        MovieLeftStartObject = movieLeft.GetComponent<movieStart>();
+     //   MovieCenterStartObject = movieCenter.GetComponent<movieStart>();
 
         toniMovies.Add(MovieTopStartObject);
         toniMovies.Add(MovieBottomStartObject);
-        toniMovies.Add(MovieCenterStartObject);
+      //  toniMovies.Add(MovieCenterStartObject);
         toniMovies.Add(MovieLeftStartObject);
         toniMovies.Add(MovieRightStartObject);
 
@@ -121,13 +121,24 @@ public class GazeGestureManagerMovie : MonoBehaviour
             // if the raycast did no hit holo, clear focused object
             FocusedObject = null;
 
+  
             // pause movie if raycast doesn't hit anything
-      
-            MovieTopStartObject.PauseMovie();
-            MovieBottomStartObject.PauseMovie();
-            MovieLeftStartObject.PauseMovie();
-            MovieRightStartObject.PauseMovie();
-            MovieCenterStartObject.PauseMovie();
+            for (int i = 0; i < toniMovies.Count; i++)
+            {
+                if (toniMovies[i] != null)
+                {
+                    MovieTopStartObject.PauseMovie();
+                    MovieBottomStartObject.PauseMovie();
+                    MovieLeftStartObject.PauseMovie();
+                    MovieRightStartObject.PauseMovie();
+                    //MovieCenterStartObject.PauseMovie();
+
+                }
+                else
+                {
+                    Debug.Log("no movies");
+                }
+            }
         }
 
         // if the focused object changed, start detecting fresh gestures
@@ -165,26 +176,24 @@ public class GazeGestureManagerMovie : MonoBehaviour
             }
             else if (FocusedObject == movieLeft)
             {
+                Debug.Log("movieLEft");
                 MovieLeftStartObject.PlayMovie();
              
             }
             else if (FocusedObject == movieRight)
             {
-               
+                Debug.Log("movieRight");
                 MovieRightStartObject.PlayMovie();
 
-            }
+            }/*
             else if (FocusedObject == movieCenter)
             {
        
                 MovieCenterStartObject.PlayMovie();
              
-            }
-            else if (FocusedObject == null)
-            {
-                Debug.Log("not watching");
-          
-            }
+            }*/
+            else { }
+           
             
 
             recognizer.CancelGestures();

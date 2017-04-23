@@ -29,8 +29,8 @@ public class DeskLighting : MonoBehaviour {
 	void Update () {
         //deskOffset = transform.localPosition - deskPosition.transform.localPosition;
         deskOffset = transform.position - deskPosition.transform.position;
-        Debug.Log("DeskPos: " + deskPosition.transform.localPosition);
-        Debug.Log("deskoffset" + Mathf.Abs(deskOffset.x));
+        //Debug.Log("DeskPos: " + deskPosition.transform.localPosition);
+        //Debug.Log("deskoffset" + Mathf.Abs(deskOffset.x));
 
         if (Mathf.Abs(deskOffset.x) < 2f)
             
