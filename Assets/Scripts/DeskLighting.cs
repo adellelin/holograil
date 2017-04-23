@@ -14,6 +14,7 @@ public class DeskLighting : MonoBehaviour {
     void Start () {
 
         deskLightObject.enabled = false;
+        deskLightObject.enabled = true;
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
         viewerTransform = transform.localPosition;
         Debug.Log("viewerPosition: " + viewerTransform);
@@ -26,11 +27,15 @@ public class DeskLighting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        deskOffset = transform.localPosition - deskPosition.transform.localPosition;
-        //Debug.Log("DistanceFromDesk: " + deskOffset);
+        //deskOffset = transform.localPosition - deskPosition.transform.localPosition;
+        deskOffset = transform.position - deskPosition.transform.position;
+        Debug.Log("DeskPos: " + deskPosition.transform.localPosition);
+        Debug.Log("deskoffset" + Mathf.Abs(deskOffset.x));
 
-        if (deskOffset.x < 2f)
+        if (Mathf.Abs(deskOffset.x) < 2f)
+            
         {
+            Debug.Log("walked into desk");
             deskLightObject.enabled = true;
         } else
         {

@@ -25,6 +25,7 @@ public class GazeGestureManagerMovie : MonoBehaviour
     GameObject toniStatement;
     //private GameObject[] toniDeskObject;
     List<GameObject> toniDeskObjects = new List<GameObject>();
+    List<movieStart> toniMovies = new List<movieStart>();
 
 
     private movieStart MovieTopStartObject;
@@ -34,6 +35,7 @@ public class GazeGestureManagerMovie : MonoBehaviour
     private movieStart MovieCenterStartObject;
 
     public Text[] ToniDeskText;
+
 
 
 
@@ -48,6 +50,7 @@ public class GazeGestureManagerMovie : MonoBehaviour
         movieLeft = GameObject.Find("MovieLeft");
         movieRight = GameObject.Find("MovieRight");
         movieCenter = GameObject.Find("MovieCenter");
+   
 
         toniBio = GameObject.Find("ToniBio");
         toniCalendar = GameObject.Find("ToniCalendar");
@@ -57,6 +60,7 @@ public class GazeGestureManagerMovie : MonoBehaviour
         toniDeskObjects.Add(toniCalendar);
         toniDeskObjects.Add(toniContact);
         toniDeskObjects.Add(toniStatement);
+        
 
     }
 
@@ -67,6 +71,18 @@ public class GazeGestureManagerMovie : MonoBehaviour
         {
             ToniDeskText[i].enabled = false;
         }
+
+        MovieTopStartObject = movieTop.GetComponent<movieStart>();
+        MovieBottomStartObject = movieBottom.GetComponent<movieStart>();
+        MovieRightStartObject = movieRight.GetComponent<movieStart>();
+        MovieLeftStartObject = movieRight.GetComponent<movieStart>();
+        MovieCenterStartObject = movieRight.GetComponent<movieStart>();
+
+        toniMovies.Add(MovieTopStartObject);
+        toniMovies.Add(MovieBottomStartObject);
+        toniMovies.Add(MovieCenterStartObject);
+        toniMovies.Add(MovieLeftStartObject);
+        toniMovies.Add(MovieRightStartObject);
 
         // set up a gesture recognizer to detect select gestures
         recognizer = new GestureRecognizer();
@@ -104,12 +120,20 @@ public class GazeGestureManagerMovie : MonoBehaviour
         {
             // if the raycast did no hit holo, clear focused object
             FocusedObject = null;
+
+            // pause movie if raycast doesn't hit anything
+      
+            MovieTopStartObject.PauseMovie();
+            MovieBottomStartObject.PauseMovie();
+            MovieLeftStartObject.PauseMovie();
+            MovieRightStartObject.PauseMovie();
+            MovieCenterStartObject.PauseMovie();
         }
 
         // if the focused object changed, start detecting fresh gestures
         if (FocusedObject != oldFocusedObject)
         {
-            Debug.Log(FocusedObject);
+            //Debug.Log(FocusedObject);
             for (int i = 0; i < ToniDeskText.Length; i++)
             {
                 if (FocusedObject == toniDeskObjects[i])
@@ -125,61 +149,43 @@ public class GazeGestureManagerMovie : MonoBehaviour
                     ToniDeskText[i].enabled = false;
                 }
             }
-            /*
+            
             if (FocusedObject == movieTop)
             {
-                MovieTopStartObject = movieTop.GetComponent<movieStart>();
+                
                 MovieTopStartObject.PlayMovie();
-                MovieBottomStartObject.PauseMovie();
-                MovieLeftStartObject.PauseMovie();
-                MovieRightStartObject.PauseMovie();
-                MovieCenterStartObject.PauseMovie();
+ 
             }
             else if (FocusedObject == movieBottom)
             {
-                MovieBottomStartObject = movieBottom.GetComponent<movieStart>();
+             
                 MovieBottomStartObject.PlayMovie();
-                MovieTopStartObject.PauseMovie();
-                MovieLeftStartObject.PauseMovie();
-                MovieRightStartObject.PauseMovie();
-                MovieCenterStartObject.PauseMovie();
+                
+           
             }
             else if (FocusedObject == movieLeft)
             {
-                MovieLeftStartObject = movieLeft.GetComponent<movieStart>();
                 MovieLeftStartObject.PlayMovie();
-                MovieTopStartObject.PauseMovie();
-                MovieBottomStartObject.PauseMovie();
-                MovieRightStartObject.PauseMovie();
-                MovieCenterStartObject.PauseMovie();
+             
             }
             else if (FocusedObject == movieRight)
             {
-                MovieRightStartObject = movieRight.GetComponent<movieStart>();
+               
                 MovieRightStartObject.PlayMovie();
-                MovieTopStartObject.PauseMovie();
-                MovieBottomStartObject.PauseMovie();
-                MovieLeftStartObject.PauseMovie();
-                MovieCenterStartObject.PauseMovie();
+
             }
             else if (FocusedObject == movieCenter)
             {
-                MovieCenterStartObject = movieCenter.GetComponent<movieStart>();
+       
                 MovieCenterStartObject.PlayMovie();
-                MovieTopStartObject.PauseMovie();
-                MovieBottomStartObject.PauseMovie();
-                MovieLeftStartObject.PauseMovie();
-                MovieRightStartObject.PauseMovie();
+             
             }
-            else
+            else if (FocusedObject == null)
             {
-                MovieTopStartObject.PauseMovie();
-                MovieBottomStartObject.PauseMovie();
-                MovieLeftStartObject.PauseMovie();
-                MovieRightStartObject.PauseMovie();
-                MovieCenterStartObject.PauseMovie();
+                Debug.Log("not watching");
+          
             }
-            */
+            
 
             recognizer.CancelGestures();
             recognizer.StartCapturingGestures();
