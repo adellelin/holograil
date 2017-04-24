@@ -23,6 +23,11 @@ public class GazeGestureManagerToni : MonoBehaviour
     public GameObject toniContact;
     public GameObject toniCalendar;
     public GameObject toniStatement;
+
+    GameObject tomBio;
+    GameObject tomContact;
+    GameObject tomCalendar;
+    GameObject tomStatement;
     //private GameObject[] toniDeskObject;
     List<GameObject> toniDeskObjects = new List<GameObject>();
     List<movieStart> toniMovies = new List<movieStart>();
