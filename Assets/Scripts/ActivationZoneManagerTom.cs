@@ -13,7 +13,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
     public GameObject sculptureActivationZoneLightObject;
     public GameObject deskActivationZonePosition;       //Public variable to store a reference to the desk game object
     public Light deskActivationZoneLightObject;
-    private Vector3 paintingActivationZoneOffset;         //Private variable to store the offset distance between the painting and camera
+    private float paintingActivationZoneOffset;         //Private variable to store the offset distance between the painting and camera
     private Vector3 sculptureActivationZoneOffset;         //Private variable to store the offset distance between the sculpture and camera
     private Vector3 deskActivationZoneOffset;         //Private variable to store the offset distance between the desk and camera
     private Vector3 viewerTransform;
@@ -23,7 +23,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
     //AudioClip paintingAudio;
     AudioSource paintingAudio;
     AudioSource sculptureAudio;
-
+    public GameObject pendulum;
 
     // public Text PositionCamera;
 
@@ -35,6 +35,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
         sculptureActivationZonePosition.SetActive(false);
         sculptureActivationZoneLightObject.SetActive(false);
         deskActivationZoneLightObject.enabled = false;
+        pendulum.SetActive(false);
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
         viewerTransform = transform.position;
         Debug.Log("viewerPosition: " + viewerTransform);
@@ -48,11 +49,14 @@ public class ActivationZoneManagerTom : MonoBehaviour
     {
 
         //Dynamic evaluation of distance to painting activation zone
-        paintingActivationZoneOffset = transform.position - paintingActivationZonePosition.transform.position;
-
-        if (Mathf.Abs(paintingActivationZoneOffset.x) < 2f)
+        //paintingActivationZoneOffset = transform.position - paintingActivationZonePosition.transform.position;
+        //Debug.Log(paintingActivationZoneOffset);
+        paintingActivationZoneOffset = Vector3.Distance(transform.position, paintingActivationZonePosition.transform.position);
+        //Debug.Log(paintingActivationZoneOffset);
+        if (paintingActivationZoneOffset < 3f)
         {
             paintingActivationZoneLightObject.enabled = true;
+            pendulum.SetActive(true);
 
             if (!paintingAudioTriggered)
             {
@@ -64,6 +68,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
         {
             paintingActivationZoneLightObject.enabled = false;
             paintingAudio.Pause();
+            pendulum.SetActive(false);
         }
 
         //Dynamic evaluation of distance to sculpture activation zone

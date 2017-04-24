@@ -9,21 +9,39 @@ public class KeyCommandsToni : MonoBehaviour {
     public Text ToniDoveBio;
     public GameObject ToniDoveStudio;
     public GameObject TomsStudio;
+    public GameObject MovieBottom;
+    public GameObject KeyScene;
+    public GazeGestureManagerToni gazeToni;
+    public GazeGestureManager gazeKeyScene;
+    public ActivationZoneManagerToni activationZoneToni;
+    public ActivationZoneManagerTom activationZoneTom;
 
     // called by gazegesturemanager
-    
 
     public void OnSelect()
     {
         if (ToniDoveStudio.activeSelf == false)
         {
+            MovieBottom.SetActive(true);
             ToniDoveStudio.SetActive(true);
-			gameObject.GetComponent<GazeGestureManagerTom>().enabled = false;
+            KeyScene.SetActive(false);
+            activationZoneTom.enabled = false;
+            activationZoneToni.enabled = true;
+          
+            gazeKeyScene.enabled = false;
+       
+            
             TomsStudio.SetActive(false);
-			ToniDoveStudio.GetComponent<AudioSource> ().Play ();
+           
+            //ToniDoveStudio.GetComponent<AudioSource> ().Play();
             //SceneManager.LoadScene("ToniDove");
             ToniDoveBio.text = "Toni Dove Bio ";
+            gazeToni.enabled = true;
+
+
         }
+
        
+
     }
 }

@@ -59,7 +59,7 @@ public class GazeGestureManagerTom : MonoBehaviour
             {
                 FocusedObject.SendMessageUpwards("OnSelect");
                 //  to call onAirTapped method
-                FocusedObject.SendMessage("OnAirTapped", SendMessageOptions.RequireReceiver);
+                //FocusedObject.SendMessage("OnAirTapped", SendMessageOptions.RequireReceiver);
             }
         };
         recognizer.StartCapturingGestures();

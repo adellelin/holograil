@@ -37,8 +37,6 @@ public class GazeGestureManagerToni : MonoBehaviour
     public Text[] ToniDeskText;
 
 
-
-
     // Use this for initialization
     void Awake()
     {
@@ -50,7 +48,7 @@ public class GazeGestureManagerToni : MonoBehaviour
         movieLeft = GameObject.Find("MovieLeft");
         movieRight = GameObject.Find("MovieRight");
         movieCenter = GameObject.Find("MovieCenter");
-   
+
 
         toniBio = GameObject.Find("ToniBio");
         toniCalendar = GameObject.Find("ToniCalendar");
@@ -60,27 +58,30 @@ public class GazeGestureManagerToni : MonoBehaviour
         toniDeskObjects.Add(toniCalendar);
         toniDeskObjects.Add(toniContact);
         toniDeskObjects.Add(toniStatement);
-        
+
+        MovieTopStartObject = movieTop.GetComponent<movieStart>();
+
+        MovieRightStartObject = movieRight.GetComponent<movieStart>();
+        MovieLeftStartObject = movieLeft.GetComponent<movieStart>();
+        MovieCenterStartObject = movieCenter.GetComponent<movieStart>();
+        MovieBottomStartObject = movieBottom.GetComponent<movieStart>();
 
     }
 
     void Start()
     {
-    
+
         for (int i = 0; i < ToniDeskText.Length; i++)
         {
             ToniDeskText[i].enabled = false;
+            Debug.Log("desk objects" + toniDeskObjects[i]);
         }
 
-        MovieTopStartObject = movieTop.GetComponent<movieStart>();
-        MovieBottomStartObject = movieBottom.GetComponent<movieStart>();
-        MovieRightStartObject = movieRight.GetComponent<movieStart>();
-        MovieLeftStartObject = movieLeft.GetComponent<movieStart>();
-     //   MovieCenterStartObject = movieCenter.GetComponent<movieStart>();
+
 
         toniMovies.Add(MovieTopStartObject);
         toniMovies.Add(MovieBottomStartObject);
-      //  toniMovies.Add(MovieCenterStartObject);
+        toniMovies.Add(MovieCenterStartObject);
         toniMovies.Add(MovieLeftStartObject);
         toniMovies.Add(MovieRightStartObject);
 
@@ -93,7 +94,7 @@ public class GazeGestureManagerToni : MonoBehaviour
             {
                 FocusedObject.SendMessageUpwards("OnSelect");
                 //  to call onAirTapped method
-                FocusedObject.SendMessage("OnAirTapped", SendMessageOptions.RequireReceiver);
+                //FocusedObject.SendMessage("OnAirTapped", SendMessageOptions.RequireReceiver);
             }
         };
         recognizer.StartCapturingGestures();
@@ -121,7 +122,7 @@ public class GazeGestureManagerToni : MonoBehaviour
             // if the raycast did no hit holo, clear focused object
             FocusedObject = null;
 
-  
+
             // pause movie if raycast doesn't hit anything
             for (int i = 0; i < toniMovies.Count; i++)
             {
@@ -131,12 +132,12 @@ public class GazeGestureManagerToni : MonoBehaviour
                     MovieBottomStartObject.PauseMovie();
                     MovieLeftStartObject.PauseMovie();
                     MovieRightStartObject.PauseMovie();
-                    //MovieCenterStartObject.PauseMovie();
+                    MovieCenterStartObject.PauseMovie();
 
                 }
                 else
                 {
-                    Debug.Log("no movies");
+                    //Debug.Log("no movies");
                 }
             }
         }
@@ -145,55 +146,60 @@ public class GazeGestureManagerToni : MonoBehaviour
         if (FocusedObject != oldFocusedObject)
         {
             //Debug.Log(FocusedObject);
+
             for (int i = 0; i < ToniDeskText.Length; i++)
             {
+               // Debug.Log(FocusedObject);
+               // Debug.Log("desk object names: " + toniDeskObjects[i]);
+
                 if (FocusedObject == toniDeskObjects[i])
                 {
-                   
+                   // Debug.Log(FocusedObject);
                     ToniDeskText[i].enabled = true;
                     //toniBio.transform.Rotate(Vector3.up * 50 * Time.deltaTime, Space.Self);
 
-                    Debug.Log("found bio");
+                    Debug.Log("found desk object");
                 }
                 else
                 {
                     ToniDeskText[i].enabled = false;
+                    //Debug.Log("can't find it");
                 }
             }
-            
+
             if (FocusedObject == movieTop)
             {
-                
+
                 MovieTopStartObject.PlayMovie();
- 
+
             }
             else if (FocusedObject == movieBottom)
             {
-             
+
                 MovieBottomStartObject.PlayMovie();
-                
-           
+
+
             }
             else if (FocusedObject == movieLeft)
             {
                 Debug.Log("movieLEft");
                 MovieLeftStartObject.PlayMovie();
-             
+
             }
             else if (FocusedObject == movieRight)
             {
                 Debug.Log("movieRight");
                 MovieRightStartObject.PlayMovie();
 
-            }/*
+            }
             else if (FocusedObject == movieCenter)
             {
-       
+
                 MovieCenterStartObject.PlayMovie();
-             
-            }*/
+
+            }
             else { }
-           
+
 
             recognizer.CancelGestures();
             recognizer.StartCapturingGestures();

@@ -23,8 +23,12 @@ public class RotationGestureHandler : MonoBehaviour {
             this.transform.GetChild(0).Rotate(0, 0, 1f);
         }
 	}
-
+    /*
     void OnAirTapped()
+    {
+        isActive = !isActive;
+    }*/
+    void OnSelect()
     {
         isActive = !isActive;
     }
