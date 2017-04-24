@@ -25,8 +25,8 @@ public class ArtistContact : MonoBehaviour {
     }
     public void OnSelect()
     {
-
-        //BioText.SetActive(true);
+		//BioText.SetActive(true);
         isActive = !isActive;
+	
     }
 }

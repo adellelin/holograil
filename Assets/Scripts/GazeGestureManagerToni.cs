@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.VR.WSA.Input;
 using UnityEngine.UI;
 
-public class GazeGestureManagerMovie : MonoBehaviour
+public class GazeGestureManagerToni : MonoBehaviour
 {
 
-    public static GazeGestureManagerMovie instance { get; private set; }
+    public static GazeGestureManagerToni instance { get; private set; }
 
     // hologram being gazed at
     public GameObject FocusedObject { get; private set; }
@@ -194,7 +194,6 @@ public class GazeGestureManagerMovie : MonoBehaviour
             }*/
             else { }
            
-            
 
             recognizer.CancelGestures();
             recognizer.StartCapturingGestures();

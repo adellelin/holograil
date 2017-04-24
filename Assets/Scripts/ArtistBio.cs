@@ -11,7 +11,7 @@ public class ArtistBio : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-            BioText.SetActive(false);
+        BioText.SetActive(false);
    
     }
 
@@ -28,8 +28,13 @@ public class ArtistBio : MonoBehaviour {
     }
     public void OnSelect()
     {
-
-        //BioText.SetActive(true);
         isActive = !isActive;
+        if (isActive)
+        {
+			gameObject.GetComponent<AudioSource> ().Play ();
+        } else
+        {
+            gameObject.GetComponent<AudioSource>().Stop();
+        }
     }
 }

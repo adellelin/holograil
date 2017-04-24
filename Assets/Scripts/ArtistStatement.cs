@@ -31,5 +31,9 @@ public class ArtistStatement : MonoBehaviour {
 
         //BioText.SetActive(true);
         isActive = !isActive;
+		if (isActive)
+		{
+			gameObject.GetComponent<AudioSource> ().Play ();
+		}
     }
 }

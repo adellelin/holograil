@@ -29,5 +29,6 @@ public class ArtistCalendar : MonoBehaviour {
 
         //BioText.SetActive(true);
         isActive = !isActive;
+
     }
 }
