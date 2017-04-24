@@ -16,24 +16,25 @@ public class ArtistStatement : MonoBehaviour
 
     private void Update()
     {
-        if (isActive)
-        {
-            Debug.Log("is active");
-            StatementText.SetActive(true);
-            gameObject.GetComponent<AudioSource>().Play();
-        }
-        else
-        {
-            //StatementText.SetActive(false);
-        }
+ 
     }
     public void OnSelect()
     {
         Debug.Log("statement selected");
         //BioText.SetActive(true);
         isActive = !isActive;
-        StatementText.SetActive(true);
-        gameObject.GetComponent<AudioSource>().Play();
+        Debug.Log("is it active?" + isActive);
+        if (isActive)
+        {
+            Debug.Log("is active");
+            StatementText.SetActive(true);
+            gameObject.GetComponent<AudioSource>().Play();
+        }
+        else if (!isActive)
+        {
+            StatementText.SetActive(false);
+            gameObject.GetComponent<AudioSource>().Pause();
+        }
 
     }
 

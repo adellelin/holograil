@@ -14,19 +14,18 @@ public class GazeGestureManagerToni : MonoBehaviour
 
     GestureRecognizer recognizer;
 
-    GameObject movieTop;
-    GameObject movieBottom;
-    GameObject movieLeft;
-    GameObject movieRight;
-    GameObject movieCenter;
-    GameObject toniBio;
-    GameObject toniContact;
-    GameObject toniCalendar;
-    GameObject toniStatement;
+    public GameObject movieTop;
+    public GameObject movieBottom;
+    public GameObject movieLeft;
+    public GameObject movieRight;
+    public GameObject movieCenter;
+    public GameObject toniBio;
+    public GameObject toniContact;
+    public GameObject toniCalendar;
+    public GameObject toniStatement;
     //private GameObject[] toniDeskObject;
     List<GameObject> toniDeskObjects = new List<GameObject>();
     List<movieStart> toniMovies = new List<movieStart>();
-
 
     private movieStart MovieTopStartObject;
     private movieStart MovieBottomStartObject;
@@ -42,25 +41,25 @@ public class GazeGestureManagerToni : MonoBehaviour
     {
 
         instance = this;
-
+        /*
         movieTop = GameObject.Find("MovieTop");
         movieBottom = GameObject.Find("MovieBottom");
         movieLeft = GameObject.Find("MovieLeft");
         movieRight = GameObject.Find("MovieRight");
         movieCenter = GameObject.Find("MovieCenter");
 
-
+  
         toniBio = GameObject.Find("ToniBio");
         toniCalendar = GameObject.Find("ToniCalendar");
         toniStatement = GameObject.Find("ToniStatement");
         toniContact = GameObject.Find("ToniContact");
+          */
         toniDeskObjects.Add(toniBio);
         toniDeskObjects.Add(toniCalendar);
         toniDeskObjects.Add(toniContact);
         toniDeskObjects.Add(toniStatement);
 
         MovieTopStartObject = movieTop.GetComponent<movieStart>();
-
         MovieRightStartObject = movieRight.GetComponent<movieStart>();
         MovieLeftStartObject = movieLeft.GetComponent<movieStart>();
         MovieCenterStartObject = movieCenter.GetComponent<movieStart>();
@@ -76,8 +75,6 @@ public class GazeGestureManagerToni : MonoBehaviour
             ToniDeskText[i].enabled = false;
             Debug.Log("desk objects" + toniDeskObjects[i]);
         }
-
-
 
         toniMovies.Add(MovieTopStartObject);
         toniMovies.Add(MovieBottomStartObject);

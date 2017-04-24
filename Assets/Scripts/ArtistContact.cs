@@ -14,6 +14,11 @@ public class ArtistContact : MonoBehaviour {
     }
     private void Update()
     {
+    }
+    public void OnSelect()
+    {
+		//BioText.SetActive(true);
+        isActive = !isActive;
         if (isActive)
         {
             ContactText.SetActive(true);
@@ -22,11 +27,6 @@ public class ArtistContact : MonoBehaviour {
         {
             ContactText.SetActive(false);
         }
-    }
-    public void OnSelect()
-    {
-		//BioText.SetActive(true);
-        isActive = !isActive;
-	
-    }
+    
+}
 }

@@ -17,15 +17,15 @@ public class ArtistStatementToni : MonoBehaviour
     void Update()
     {
         //Debug.Log("is it active?" + isActive);
- 
+
     }
+
     public void OnSelect()
     {
         Debug.Log("statement selected");
         //BioText.SetActive(true);
         isActive = !isActive;
         Debug.Log("is it active?" + isActive);
-        
         if (isActive)
         {
             Debug.Log("is active");
@@ -37,7 +37,9 @@ public class ArtistStatementToni : MonoBehaviour
             StatementText.SetActive(false);
             gameObject.GetComponent<AudioSource>().Pause();
         }
+
     }
+
 
 
 }

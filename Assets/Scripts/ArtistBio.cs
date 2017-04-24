@@ -17,24 +17,19 @@ public class ArtistBio : MonoBehaviour {
 
     private void Update()
     {
-        if (isActive)
-        {
-            BioText.SetActive(true);
-        }
-        else
-        {
-            BioText.SetActive(false);
-        }
+
     }
     public void OnSelect()
     {
         isActive = !isActive;
         if (isActive)
         {
-			gameObject.GetComponent<AudioSource> ().Play ();
+            BioText.SetActive(true);
+            gameObject.GetComponent<AudioSource> ().Play ();
         } else
         {
-            gameObject.GetComponent<AudioSource>().Stop();
+            BioText.SetActive(false);
+            gameObject.GetComponent<AudioSource>().Pause();
         }
     }
 }

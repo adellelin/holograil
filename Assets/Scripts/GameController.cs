@@ -5,9 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    
+    public GameObject ToniDoveStudio;
+    public GameObject TomsStudio;
+    public GameObject MovieBottom;
+    public GameObject KeyScene;
+    public GazeGestureManagerToni gazeToni;
+    public GazeGestureManager gazeKeyScene;
+    public GazeGestureManagerTom gazeTom;
+    public ActivationZoneManagerToni activationZoneToni;
+    public ActivationZoneManagerTom activationZoneTom;
+    // Use this for initialization
+    void Start () {
 
         // GUI is rendered with last camera.
         // As we want it to end up in the main screen, make sure main camera is the last one drawn.
@@ -21,6 +30,16 @@ public class GameController : MonoBehaviour {
         if (Display.displays.Length > 3)
             Display.displays[3].Activate();
 
+
+        MovieBottom.SetActive(false);
+        ToniDoveStudio.SetActive(false);
+        TomsStudio.SetActive(false);
+        KeyScene.SetActive(true);
+        activationZoneTom.enabled = false;
+        activationZoneToni.enabled = false;
+        //gazeKeyScene.enabled = true;
+        //gazeToni.enabled = true;
+        //gazeTom.enabled = true;
     }
 	
 	// Update is called once per frame

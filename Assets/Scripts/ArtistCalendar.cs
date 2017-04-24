@@ -15,6 +15,13 @@ public class ArtistCalendar : MonoBehaviour {
 
     private void Update()
     {
+ 
+    }
+    public void OnSelect()
+    {
+
+        //BioText.SetActive(true);
+        isActive = !isActive;
         if (isActive)
         {
             CalendarText.SetActive(true);
@@ -23,12 +30,5 @@ public class ArtistCalendar : MonoBehaviour {
         {
             CalendarText.SetActive(false);
         }
-    }
-    public void OnSelect()
-    {
-
-        //BioText.SetActive(true);
-        isActive = !isActive;
-
     }
 }
