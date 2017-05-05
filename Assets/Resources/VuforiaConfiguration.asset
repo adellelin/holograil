@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vuforia:
     vuforiaLicenseKey: AXm9QvH/////AAAAGZtU12VCZEwqpsjDxNUL23t6j5OpeVKFQjYOKha9JpTqOBuobGG9+0t0qmCCEeotdApW7orqAb6hNpCA2tybDYq499EvbtWfWhUgqgXhV09Xz/jF398gky8P9HjdRssT1qsWrJ9eMhOHxeek7DhvP3I/ZslIc/Q0MkI+ltO5WEjDqkDNC6eDfDQU3LVgiA/TMy4Mf8Uj2zEZEj++BAn669aju7/ElF/MV9Vz4CLiZOYPaSeIzFb3ABOu04toxCcRd+Q4PErpUpADvgkqIvow41cfay8uOOf7cuvbwvSLiR994d3jN1ELEAbK9xH/LHkoQKbbTwDzlyuf0du8X2Iqhc53ro8xnVzIcMCnKuSDhQjq
-    delayedInitialization: 0
+    delayedInitialization: 1
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1
     maxSimultaneousObjectTargets: 1
-    useDelayedLoadingObjectTargets: 0
+    useDelayedLoadingObjectTargets: 1
     cameraDirection: 0
     mirrorVideoBackground: 0
   digitalEyewear:

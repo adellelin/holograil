@@ -14,7 +14,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
     public GameObject deskActivationZonePosition;       //Public variable to store a reference to the desk game object
     public Light deskActivationZoneLightObject;
     private float paintingActivationZoneOffset;         //Private variable to store the offset distance between the painting and camera
-    private Vector3 sculptureActivationZoneOffset;         //Private variable to store the offset distance between the sculpture and camera
+    private float sculptureActivationZoneOffset;         //Private variable to store the offset distance between the sculpture and camera
     private Vector3 deskActivationZoneOffset;         //Private variable to store the offset distance between the desk and camera
     private Vector3 viewerTransform;
     private bool paintingAudioTriggered = false;
@@ -53,7 +53,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
         //Debug.Log(paintingActivationZoneOffset);
         paintingActivationZoneOffset = Vector3.Distance(transform.position, paintingActivationZonePosition.transform.position);
         //Debug.Log(paintingActivationZoneOffset);
-        if (paintingActivationZoneOffset < 3f)
+        if (paintingActivationZoneOffset < 3.3f )
         {
             paintingActivationZoneLightObject.enabled = true;
             pendulum.SetActive(true);
@@ -72,9 +72,10 @@ public class ActivationZoneManagerTom : MonoBehaviour
         }
 
         //Dynamic evaluation of distance to sculpture activation zone
-        sculptureActivationZoneOffset = transform.position - sculptureActivationZonePosition.transform.position;
+        sculptureActivationZoneOffset = Vector3.Distance(transform.position, sculptureActivationZonePosition.transform.position);
+        
         //Debug.Log("sculptureoffset: "+sculptureActivationZoneOffset);
-        if (Mathf.Abs(sculptureActivationZoneOffset.x) < 2f)
+        if (sculptureActivationZoneOffset < 3.3f)
         {
             sculptureActivationZoneLightObject.SetActive(true);
             if (!sculptureAudioTriggered)
@@ -85,6 +86,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
         }
         else
         {
+            sculptureAudio.Pause();
             sculptureActivationZoneLightObject.SetActive(false);
         }
 
@@ -111,12 +113,13 @@ public class ActivationZoneManagerTom : MonoBehaviour
     {
 
         paintingAudio.Play();
-        Invoke("SculptureAppear", paintingAudio.clip.length);
+        //Invoke("SculptureAppear", paintingAudio.clip.length);
+        Invoke("SculptureAppear", 10);
     }
 
     void SculptureAppear()
     {
         sculptureActivationZonePosition.SetActive(true);
-        paintingAudio.Stop();
+        //paintingAudio.Stop();
     }
 }

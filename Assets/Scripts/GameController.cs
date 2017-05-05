@@ -10,9 +10,10 @@ public class GameController : MonoBehaviour {
     public GameObject TomsStudio;
     public GameObject MovieBottom;
     public GameObject KeyScene;
-    public GazeGestureManagerToni gazeToni;
-    public GazeGestureManager gazeKeyScene;
-    public GazeGestureManagerTom gazeTom;
+    //public GazeGestureManagerToni gazeToni;
+   
+    //public GazeGestureManager gazeKeyScene;
+    //public GazeGestureManagerTom gazeTom;
     public ActivationZoneManagerToni activationZoneToni;
     public ActivationZoneManagerTom activationZoneTom;
     // Use this for initialization

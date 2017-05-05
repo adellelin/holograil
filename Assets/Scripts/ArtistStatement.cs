@@ -11,7 +11,7 @@ public class ArtistStatement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        StatementText.SetActive(true);
+        StatementText.SetActive(false);
     }
 
     private void Update()

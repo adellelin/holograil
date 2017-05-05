@@ -33,10 +33,10 @@ public class KeyCommandsToni : MonoBehaviour {
             
             TomsStudio.SetActive(false);
            
-            //ToniDoveStudio.GetComponent<AudioSource> ().Play();
+            ToniDoveStudio.GetComponent<AudioSource> ().Play();
             //SceneManager.LoadScene("ToniDove");
             ToniDoveBio.text = "Toni Dove Bio ";
-            gazeToni.enabled = true;
+            //gazeToni.enabled = true;
 
 
         }
