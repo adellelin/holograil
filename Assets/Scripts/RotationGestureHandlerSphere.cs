@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationGestureHandler : MonoBehaviour
+public class RotationGestureHandlerSphere : MonoBehaviour
 {
 
     private bool isActive = false;
     public ActivationZoneManagerTom activationZoneManagerTom;
+
 
 
     // Use this for initialization
@@ -23,7 +24,7 @@ public class RotationGestureHandler : MonoBehaviour
         if (isActive)
         {
             this.transform.Rotate(0, 0, 1f);
-            this.transform.GetChild(0).Rotate(0, 0, 1f);
+            //this.transform.GetChild(0).Rotate(0, 0, 1f);
         }
 
     }
@@ -34,14 +35,12 @@ public class RotationGestureHandler : MonoBehaviour
     }*/
     void OnSelect()
     {
-        //Debug.Log("cone selected");
-        //this.transform.Rotate(0, 0, 1f);
-        //this.transform.GetChild(0).Rotate(0, 0, 1f);
         if (activationZoneManagerTom.sculptureZoneActivated)
         {
             isActive = !isActive;
         }
-
+        
+        
     }
 
 }

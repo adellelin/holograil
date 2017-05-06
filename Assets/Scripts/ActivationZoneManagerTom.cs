@@ -18,11 +18,12 @@ public class ActivationZoneManagerTom : MonoBehaviour
     private Vector3 deskActivationZoneOffset;         //Private variable to store the offset distance between the desk and camera
     private Vector3 viewerTransform;
     private bool paintingAudioTriggered = false;
-    private bool sculptureAudioTriggered = false;
+    private bool sculptureAudioTriggered = false;   // set audio state
+    public bool sculptureZoneActivated = false; // sets whether rotation on sculpture is allowed
 
     //AudioClip paintingAudio;
     AudioSource paintingAudio;
-    AudioSource sculptureAudio;
+    public AudioSource sculptureAudio;
     public GameObject pendulum;
 
     // public Text PositionCamera;
@@ -57,6 +58,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
         {
             paintingActivationZoneLightObject.enabled = true;
             pendulum.SetActive(true);
+            pendulum.transform.Rotate(0, 0, 1f);
 
             if (!paintingAudioTriggered)
             {
@@ -69,6 +71,7 @@ public class ActivationZoneManagerTom : MonoBehaviour
             paintingActivationZoneLightObject.enabled = false;
             paintingAudio.Pause();
             pendulum.SetActive(false);
+            paintingAudioTriggered = false;
         }
 
         //Dynamic evaluation of distance to sculpture activation zone
@@ -78,9 +81,10 @@ public class ActivationZoneManagerTom : MonoBehaviour
         if (sculptureActivationZoneOffset < 3.3f)
         {
             sculptureActivationZoneLightObject.SetActive(true);
+            sculptureZoneActivated = true;
             if (!sculptureAudioTriggered)
             {
-                playSculptureAudio();
+                sculptureAudio.Play();
                 sculptureAudioTriggered = true;
             }
         }
@@ -88,6 +92,9 @@ public class ActivationZoneManagerTom : MonoBehaviour
         {
             sculptureAudio.Pause();
             sculptureActivationZoneLightObject.SetActive(false);
+            sculptureZoneActivated = true;
+            sculptureAudioTriggered = false;
+
         }
 
         //Dynamic evaluation of distance to desk activation zone
@@ -103,12 +110,6 @@ public class ActivationZoneManagerTom : MonoBehaviour
         }
     }
 
-    private void playSculptureAudio()
-    {
-        sculptureAudio.Play();
-        
-    }
-
     private void playPaintingAudio()
     {
 
@@ -122,4 +123,5 @@ public class ActivationZoneManagerTom : MonoBehaviour
         sculptureActivationZonePosition.SetActive(true);
         //paintingAudio.Stop();
     }
+
 }

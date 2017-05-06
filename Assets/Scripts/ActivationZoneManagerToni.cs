@@ -9,8 +9,8 @@ public class ActivationZoneManagerToni : MonoBehaviour {
 	public Light dressActivationZoneLightObject;
 	public GameObject deskActivationZonePosition;       //Public variable to store a reference to the desk game object
 	public Light deskActivationZoneLightObject;
-	private Vector3 dressActivationZoneOffset;         //Private variable to store the offset distance between the dress and camera
-	private Vector3 deskActivationZoneOffset;         //Private variable to store the offset distance between the desk and camera
+	private float dressActivationZoneOffset;         //Private variable to store the offset distance between the dress and camera
+	private float deskActivationZoneOffset;         //Private variable to store the offset distance between the desk and camera
 	private Vector3 viewerTransform;
     // public Text PositionCamera;
 
@@ -34,9 +34,10 @@ public class ActivationZoneManagerToni : MonoBehaviour {
 	void Update () {
 
 		//Dynamic evaluation of distance to dress activation zone
-		dressActivationZoneOffset = transform.position - dressActivationZonePosition.transform.position;
+		//dressActivationZoneOffset = transform.position - dressActivationZonePosition.transform.position;
+        dressActivationZoneOffset = Vector3.Distance(transform.position, dressActivationZonePosition.transform.position);
 
-		if (Mathf.Abs(dressActivationZoneOffset.x) < 2f)
+		if (Mathf.Abs(dressActivationZoneOffset) < 2.5f)
 		{
 			dressActivationZoneLightObject.enabled = true;
             if (!dressAudioTriggered)
@@ -53,9 +54,11 @@ public class ActivationZoneManagerToni : MonoBehaviour {
 
 
 		//Dynamic evaluation of distance to desk activation zone
-		deskActivationZoneOffset = transform.position - deskActivationZonePosition.transform.position;
+		//deskActivationZoneOffset = transform.position - deskActivationZonePosition.transform.position;
+        deskActivationZoneOffset = Vector3.Distance(transform.position, deskActivationZonePosition.transform.position);
 
-		if (Mathf.Abs(deskActivationZoneOffset.x) < 2f)
+
+        if (Mathf.Abs(deskActivationZoneOffset) < 2.5f)
 		{
 			deskActivationZoneLightObject.enabled = true;
 		} else
